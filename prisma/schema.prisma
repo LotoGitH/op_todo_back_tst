@@ -10,5 +10,21 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+}
+
+/// Tabla principal de tareas
+model ToDo {
+  id                Int       @id @default(autoincrement())
+
+  // Información de la tarea
+  title             String
+  description       String?
+  targetDate        DateTime?
+  assignedUserName  String?
+
+  // Metadata
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @default(now()) @updatedAt
+  deletedAt         DateTime?
+  status            String    @default("active")
 }
